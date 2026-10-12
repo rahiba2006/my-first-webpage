@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ===== Page setup ===== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahiba | Web Development & AI Data Annotation Learner</title>
+  <meta name="description" content="Portfolio of Rahiba, an FSc Pre-Engineering graduate from Pakistan learning web development and AI data annotation.">
+  <meta property="og:title" content="Rahiba | Portfolio">
+  <meta property="og:description" content="FSc Pre-Engineering graduate from Pakistan learning web development and AI data annotation.">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* ===== 1. Colors and sizes (change here to restyle the whole site) ===== */
+    :root {
+      --navy: #14213d;
+      --navy-2: #1f3a68;
+      --accent: #3b6fd8;
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --text: #1a2233;
+      --soft: #4a5568;
+      --line: #e2e8f2;
+      --radius: 12px;
+      --shadow: 0 4px 18px rgba(20, 33, 61, 0.07);
+    }
+
+    /* ===== 2. Basic reset ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 17px;
+    }
+    a { color: var(--accent); }
+    a:focus-visible, label:focus-visible { outline: 3px solid #f2b705; outline-offset: 3px; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+    /* Skip link for keyboard users */
+    .skip { position: absolute; left: -999px; top: 0; background: #fff; padding: 8px 14px; z-index: 100; }
+    .skip:focus { left: 10px; top: 10px; }
+
+    /* ===== 3. Navigation (with mobile menu, no JavaScript) ===== */
+    header {
+      background: var(--navy);
+      position: sticky; top: 0; z-index: 50;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .logo { color: #fff; font-weight: 800; font-size: 1.25rem; text-decoration: none; letter-spacing: 0.5px; }
+    .logo span { color: #8fb3ff; }
+    .menu { list-style: none; display: flex; gap: 24px; }
+    .menu a { color: #d5def0; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+    .menu a:hover { color: #fff; }
+    #menu-toggle { display: none; }
+    .menu-btn { display: none; color: #fff; font-size: 1.6rem; cursor: pointer; padding: 4px 8px; }
+
+    /* ===== 4. Hero ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+      color: #fff;
+      padding: 80px 0 90px;
+    }
+    .hero-inner { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      background: #fff; color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; font-weight: 800;
+      border: 5px solid rgba(255,255,255,0.25);
+      flex-shrink: 0;
+    }
+    .hero-text { flex: 1; min-width: 260px; }
+    .eyebrow { color: #8fb3ff; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; }
+    .hero h1 { font-size: 2.6rem; line-height: 1.2; margin: 8px 0 14px; }
+    .hero p { color: #d5def0; max-width: 560px; margin-bottom: 26px; }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 24px; border-radius: 8px;
+      font-weight: 600; text-decoration: none; transition: transform 0.15s, background 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-light { background: #fff; color: var(--navy); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: #fff; }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .btn-navy { background: var(--navy); color: #fff; }
+    .btn-navy:hover { background: var(--navy-2); }
+
+    /* ===== 5. Sections ===== */
+    section { padding: 70px 0; }
+    section:nth-of-type(even) { background: #fff; }
+    .section-title { text-align: center; margin-bottom: 40px; }
+    .section-title h2 { color: var(--navy); font-size: 2rem; }
+    .section-title .bar { width: 60px; height: 4px; background: var(--accent); margin: 10px auto 0; border-radius: 2px; }
+    .section-title p { color: var(--soft); margin-top: 12px; }
+    h3 { color: var(--navy); font-size: 1.15rem; margin-bottom: 8px; }
+    p { color: var(--soft); }
+
+    /* ===== 6. Cards and grids ===== */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 22px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 26px; box-shadow: var(--shadow); transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 26px rgba(20,33,61,0.12); }
+    .icon {
+      width: 46px; height: 46px; border-radius: 10px; background: #e8efff;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 14px;
+    }
+    .card ul { list-style: none; }
+    .card li { color: var(--soft); padding: 4px 0 4px 22px; position: relative; }
+    .card li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+
+    /* About layout */
+    .about { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start; }
+    .about p { margin-bottom: 14px; }
+    .facts li::before { content: "•"; }
+    .facts strong { color: var(--text); }
+
+    /* Skill progress bars (shows learning level honestly) */
+    .skill { margin-bottom: 14px; }
+    .skill-top { display: flex; justify-content: space-between; font-size: 0.92rem; color: var(--text); font-weight: 500; }
+    .skill-top span:last-child { color: var(--soft); font-weight: 400; }
+    .track { height: 8px; background: var(--line); border-radius: 4px; margin-top: 6px; overflow: hidden; }
+    .fill { height: 100%; background: linear-gradient(90deg, var(--navy-2), var(--accent)); border-radius: 4px; }
+
+    /* Language level */
+    .lang { text-align: center; }
+    .level { display: inline-block; margin-top: 6px; background: #e8efff; color: var(--navy-2); padding: 3px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+
+    /* Project badges and tags */
+    .badge {
+      display: inline-block; font-size: 0.78rem; font-weight: 700; padding: 3px 11px;
+      border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .progress { background: #fff4d6; color: #7a5600; border: 1px solid #f0d58a; }
+    .planned { background: #eef1f6; color: #4a5568; border: 1px solid #d5dbe6; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .tags span { background: #e8efff; color: var(--navy-2); font-size: 0.82rem; padding: 3px 10px; border-radius: 4px; font-weight: 500; }
+    .note { text-align: center; font-size: 0.9rem; margin-top: 24px; font-style: italic; }
+
+    /* Timeline for goals */
+    .timeline { max-width: 680px; margin: 0 auto; border-left: 3px solid var(--line); padding-left: 28px; }
+    .step { position: relative; margin-bottom: 30px; }
+    .step::before {
+      content: ""; position: absolute; left: -38px; top: 4px; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--accent); border: 3px solid #fff; box-shadow: 0 0 0 2px var(--accent);
+    }
+    .step small { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ===== 7. Contact ===== */
+    .contact-box {
+      max-width: 620px; margin: 0 auto; text-align: center; background: var(--card);
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 40px 26px; box-shadow: var(--shadow);
+    }
+    .email { display: block; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 10px 0 24px; word-break: break-all; text-decoration: none; }
+    .email:hover { color: var(--accent); }
+    .contact-box .btns { justify-content: center; }
+    .btn-soft { background: #e8efff; color: var(--navy); }
+    .email-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 10px 0 24px; }
+    .email-row .email { margin: 0; }
+    .copy-btn { border: 1px solid var(--line); background: #e8efff; color: var(--navy); font: inherit; font-size: 0.9rem; font-weight: 600; padding: 6px 14px; border-radius: 6px; cursor: pointer; }
+    .copy-btn:hover { background: #d8e4ff; }
+    .copy-btn.done { background: #dff5e5; color: #1d6b35; border-color: #b6e3c3; }
+
+    /* ===== Ask about Rahiba (AI Q&A) ===== */
+    .ask-box { max-width: 680px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .ask-form { display: flex; gap: 10px; flex-wrap: wrap; }
+    .ask-form input { flex: 1; min-width: 200px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; font: inherit; color: var(--text); }
+    .ask-form input:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+    .ask-form button { border: 0; cursor: pointer; font: inherit; }
+    .ask-form button:disabled { opacity: 0.6; cursor: wait; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chips button { background: #e8efff; color: var(--navy-2); border: 0; padding: 6px 12px; border-radius: 20px; font: inherit; font-size: 0.85rem; cursor: pointer; }
+    .chips button:hover { background: #d8e4ff; }
+    .answer { margin-top: 18px; padding: 16px; background: var(--bg); border-left: 4px solid var(--accent); border-radius: 8px; color: var(--text); white-space: pre-wrap; display: none; }
+    .answer.show { display: block; }
+    .answer.error { border-left-color: #c53030; color: #9b2c2c; }
+    .ask-note { font-size: 0.82rem; margin-top: 12px; text-align: center; }
+
+    /* ===== 8. Footer ===== */
+    footer { background: var(--navy); color: #b9c5dc; text-align: center; padding: 26px 20px; font-size: 0.9rem; }
+    footer a { color: #fff; }
+
+    /* ===== 9. Tablets and phones ===== */
+    @media (max-width: 760px) {
+      .menu-btn { display: block; }
+      .menu {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        background: var(--navy); flex-direction: column; gap: 0; padding: 10px 20px 18px;
+      }
+      .menu a { display: block; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      #menu-toggle:checked ~ .menu { display: flex; }
+      .hero { padding: 50px 0 60px; text-align: center; }
+      .hero-inner { justify-content: center; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .btns { justify-content: center; }
+      .hero h1 { font-size: 2rem; }
+      .avatar { width: 110px; height: 110px; font-size: 2.8rem; }
+      .about { grid-template-columns: 1fr; }
+      section { padding: 54px 0; }
+      .section-title h2 { font-size: 1.7rem; }
+    }
+
+    /* Respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to content</a>
+
+  <!-- ===== Navigation ===== -->
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a href="#top" class="logo">Rahiba<span>.</span></a>
+      <!-- Hidden checkbox opens/closes the phone menu -->
+      <input type="checkbox" id="menu-toggle" aria-label="Open menu">
+      <label for="menu-toggle" class="menu-btn" aria-hidden="true">☰</label>
+      <ul class="menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#languages">Languages</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#goals">Goals</a></li>
+        <li><a href="#ask">Ask</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <div class="hero" id="top">
+    <div class="container hero-inner">
+      <div class="avatar" aria-hidden="true">R</div>
+      <div class="hero-text">
+        <div class="eyebrow">Aspiring Web Developer</div>
+        <h1>Hi, I'm Rahiba</h1>
+        <p>FSc Pre-Engineering graduate from Pakistan, building my skills in web development and AI data annotation, one project at a time.</p>
+        <div class="btns">
+          <a href="#contact" class="btn btn-light">Contact Me</a>
+          <a href="#projects" class="btn btn-outline">View Projects</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- ===== About ===== -->
+    <section id="about">
+      <div class="container">
+        <div class="section-title"><h2>About Me</h2><div class="bar"></div></div>
+        <div class="about">
+          <div>
+            <p>Hello! I'm Rahiba, a recent FSc Pre-Engineering graduate from Pakistan. Studying mathematics and physics taught me to think logically, solve problems step by step and pay close attention to detail.</p>
+            <p>I am now teaching myself web development with HTML and CSS, and learning the basics of AI data annotation, the work of labeling data so AI systems can learn from it.</p>
+            <p>I am a dedicated, careful learner and I'm looking for opportunities to grow, contribute and gain real experience.</p>
+          </div>
+          <div class="card">
+            <h3>Quick Facts</h3>
+            <ul class="facts">
+              <li><strong>Education:</strong> FSc Pre-Engineering</li>
+              <li><strong>Location:</strong> Pakistan</li>
+              <li><strong>Focus:</strong> Web Dev &amp; AI Data Annotation</li>
+              <li><strong>Status:</strong> Open to internships &amp; entry-level work</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-title"><h2>Skills</h2><div class="bar"></div><p>Skills I am actively learning and practicing.</p></div>
+        <div class="grid">
+          <div class="card">
+            <div class="icon" aria-hidden="true">💻</div>
+            <h3>Web Development</h3>
+            <div class="skill"><div class="skill-top"><span>HTML</span><span>Learning</span></div><div class="track"><div class="fill" style="width:45%"></div></div></div>
+            <div class="skill"><div class="skill-top"><span>CSS</span><span>Learning</span></div><div class="track"><div class="fill" style="width:35%"></div></div></div>
+            <div class="skill"><div class="skill-top"><span>Responsive Design</span><span>Beginner</span></div><div class="track"><div class="fill" style="width:25%"></div></div></div>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true">🏷️</div>
+            <h3>AI Data Annotation</h3>
+            <ul>
+              <li>Understanding data labeling basics</li>
+              <li>Following annotation guidelines</li>
+              <li>Accuracy and consistency</li>
+              <li>Image and text labeling practice</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true">🧠</div>
+            <h3>Personal Strengths</h3>
+            <ul>
+              <li>Strong math and physics foundation</li>
+              <li>Attention to detail</li>
+              <li>Self-motivated learner</li>
+              <li>Time management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Languages ===== -->
+    <section id="languages">
+      <div class="container">
+        <div class="section-title"><h2>Languages</h2><div class="bar"></div></div>
+        <div class="grid">
+          <div class="card lang"><h3>English</h3><span class="level">Fluent</span></div>
+          <div class="card lang"><h3>Urdu</h3><span class="level">Native</span></div>
+          <div class="card lang"><h3>Saraiki</h3><span class="level">Fluent</span></div>
+          <div class="card lang"><h3>Sindhi</h3><span class="level">Intermediate</span></div>
+          <div class="card lang"><h3>Punjabi</h3><span class="level">Basic</span></div>
+          <div class="card lang"><h3>Chinese</h3><span class="level">Basic</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Learning Projects ===== -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-title"><h2>Learning Projects</h2><div class="bar"></div><p>Practice projects that help me learn. These are not finished professional work.</p></div>
+        <div class="grid">
+          <div class="card">
+            <span class="badge progress">Learning Project · In Progress</span>
+            <h3>Personal Portfolio Website</h3>
+            <p>This website. Built with HTML and CSS to practice page structure, layout and mobile-friendly design.</p>
+            <div class="tags"><span>HTML</span><span>CSS</span><span>Responsive</span></div>
+          </div>
+          <div class="card">
+            <span class="badge progress">Learning Project · In Progress</span>
+            <h3>Data Annotation Practice</h3>
+            <p>Practicing labeling sample images and text with free tutorials to understand how AI training data is prepared.</p>
+            <div class="tags"><span>Labeling</span><span>Accuracy</span></div>
+          </div>
+          <div class="card">
+            <span class="badge planned">Learning Project · Planned</span>
+            <h3>Simple Landing Page</h3>
+            <p>A planned practice page to master Flexbox and CSS Grid layouts.</p>
+            <div class="tags"><span>HTML</span><span>CSS</span></div>
+          </div>
+        </div>
+        <p class="note">More projects will be added as I learn.</p>
+      </div>
+    </section>
+
+    <!-- ===== Career Goals ===== -->
+    <section id="goals">
+      <div class="container">
+        <div class="section-title"><h2>Career Goals</h2><div class="bar"></div></div>
+        <div class="timeline">
+          <div class="step"><small>Now</small><h3>Build Strong Basics</h3><p>Finish learning HTML and CSS and complete my learning projects.</p></div>
+          <div class="step"><small>Next</small><h3>Learn JavaScript</h3><p>Add interactivity to websites and keep practicing data annotation.</p></div>
+          <div class="step"><small>Future</small><h3>Start My Career</h3><p>Get an internship or entry-level role in web development or AI data annotation, and keep growing.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Ask about Rahiba (AI-powered) ===== -->
+    <section id="ask">
+      <div class="container">
+        <div class="section-title"><h2>Ask About Me</h2><div class="bar"></div><p>Have a question about my skills, learning projects or goals? Ask here.</p></div>
+        <div class="ask-box">
+          <form class="ask-form" id="ask-form">
+            <label for="ask-input" class="skip">Your question</label>
+            <input id="ask-input" type="text" maxlength="500" placeholder="e.g. What is Rahiba learning right now?" required>
+            <button type="submit" class="btn btn-navy" id="ask-btn">Ask</button>
+          </form>
+          <div class="chips">
+            <button type="button">What skills is Rahiba learning?</button>
+            <button type="button">Tell me about her projects</button>
+            <button type="button">What are her career goals?</button>
+          </div>
+          <div class="answer" id="ask-answer" aria-live="polite"></div>
+          <p class="ask-note">AI-powered answers based only on this portfolio. For anything else, please email me.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title"><h2>Contact Me</h2><div class="bar"></div></div>
+        <div class="contact-box">
+          <p>I'm open to internships, entry-level opportunities and learning collaborations. Feel free to reach out!</p>
+          <div class="email-row">
+            <a class="email" href="mailto:rahibaksk@gmail.com">rahibaksk@gmail.com</a>
+            <button type="button" class="copy-btn" id="copy-email" aria-live="polite">📋 Copy</button>
+          </div>
+          <div class="btns">
+            <a class="btn btn-navy" href="mailto:rahibaksk@gmail.com?subject=Hello%20Rahiba">✉ Send an Email</a>
+            <a class="btn btn-soft" href="https://mail.google.com/mail/?view=cm&amp;to=rahibaksk@gmail.com" target="_blank" rel="noopener">Open in Gmail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Rahiba · Built with HTML &amp; CSS · <a href="#top">Back to top ↑</a></p>
+  </footer>
+  <!-- Small script: copies the email when the Copy button is clicked -->
+  <script>
+    var copyBtn = document.getElementById("copy-email");
+    copyBtn.addEventListener("click", function () {
+      var email = "rahibaksk@gmail.com";
+      function done() {
+        copyBtn.textContent = "✓ Copied!";
+        copyBtn.classList.add("done");
+        setTimeout(function () { copyBtn.textContent = "📋 Copy"; copyBtn.classList.remove("done"); }, 2000);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(done, fallback);
+      } else { fallback(); }
+      function fallback() {
+        var t = document.createElement("textarea");
+        t.value = email; document.body.appendChild(t); t.select();
+        try { document.execCommand("copy"); done(); } catch (e) { copyBtn.textContent = "Copy failed"; }
+        document.body.removeChild(t);
+      }
+    });
+  </script>
+  <!-- Small script: sends questions to the AI assistant and shows the answer -->
+  <script>
+    var askForm = document.getElementById("ask-form");
+    var askInput = document.getElementById("ask-input");
+    var askBtn = document.getElementById("ask-btn");
+    var answerBox = document.getElementById("ask-answer");
+
+    async function ask(question) {
+      askBtn.disabled = true;
+      askBtn.textContent = "Thinking...";
+      answerBox.className = "answer show";
+      answerBox.textContent = "Thinking...";
+      try {
+        var res = await fetch("/api/public/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question: question })
+        });
+        if (!res.ok) {
+          var data = await res.json().catch(function () { return {}; });
+          throw new Error(data.error || (res.status === 429 ? "Too many questions right now. Please try again in a minute." : "Sorry, the assistant is unavailable right now."));
+        }
+        var reader = res.body.getReader();
+        var decoder = new TextDecoder();
+        var text = "";
+        while (true) {
+          var chunk = await reader.read();
+          if (chunk.done) break;
+          text += decoder.decode(chunk.value, { stream: true });
+          answerBox.textContent = text;
+        }
+        if (!text.trim()) answerBox.textContent = "Sorry, I couldn't answer that. Please email rahibaksk@gmail.com.";
+      } catch (e) {
+        answerBox.className = "answer show error";
+        answerBox.textContent = e.message;
+      } finally {
+        askBtn.disabled = false;
+        askBtn.textContent = "Ask";
+      }
+    }
+
+    askForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var q = askInput.value.trim();
+      if (q) ask(q);
+    });
+    document.querySelectorAll(".chips button").forEach(function (b) {
+      b.addEventListener("click", function () { askInput.value = b.textContent; ask(b.textContent); });
+    });
+  </script>
+</body>
+</html>
